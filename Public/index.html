@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content= "width=device-width, initial-scale=1">
+        <title>Weather Forecast</title>
+        <style>
+            img{
+                height: 100px;
+            }
+            button{
+                font-size: 25px;
+                background-color: aquamarine;
+            }
+            
+            p{
+                font-size: 30px;
+            }
+            div{
+                
+                padding: 20px;
+                font-size: 25px;
+            }
+            #ForecastBox{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            body{
+                background-color: floralwhite;
+            }
+        </style>
+        <script>
+            var la = 0
+            var lo = 0
+            var murl = "https://cdn.aerisapi.com/wxicons/v2/"
+            function initialize(){
+                navigator.geolocation.getCurrentPosition(getPos,error);
+            }
+            function getPos(pos){
+                la = pos.coords.latitude;
+                lo = pos.coords.longitude;
+                document.getElementById("Messages").innerHTML = "Fetching forecast for lat " + la + ", lon " + lo;
+                setTimeout(function(){ 
+                    document.getElementById("Messages").innerHTML = "";
+                    requestWeather();
+                }, 5000);
+            }
+            function error(){
+                document.getElementById("Messages").innerHTML = "Error";
+            }
+            function requestWeather(){
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if(xhttp.readyState == 4 && xhttp.status == 200){
+                        let json = JSON.parse(xhttp.responseText);
+                        
+                        //Day 1 
+                        let maxtemp1 = json.response[0].periods[0].maxTempF;
+                        let mintemp1 = json.response[0].periods[0].minTempF;
+                        let icon1 = json.response[0].periods[0].icon;
+                        let date1 = json.response[0].periods[0].dateTimeISO;
+                        document.getElementById("mxt1").innerHTML = "Max Temp: " + maxtemp1 +"°F";
+                        document.getElementById("mnt1").innerHTML = "Min Temp: " + mintemp1 +"°F";
+                        document.getElementById("i1").src = murl + icon1;
+                        document.getElementById("d1").innerHTML = date1.split('T')[0];
+                        
+                        //Day 2
+                        let maxtemp2 = json.response[0].periods[1].maxTempF;
+                        let mintemp2 = json.response[0].periods[1].minTempF;
+                        let icon2 = json.response[0].periods[1].icon;
+                        let date2 = json.response[0].periods[1].dateTimeISO;
+                        document.getElementById("mxt2").innerHTML = "Max Temp: " + maxtemp2 +"°F";
+                        document.getElementById("mnt2").innerHTML = "Min Temp: " + mintemp2 +"°F";
+                        document.getElementById("i2").src = murl + icon2;
+                        document.getElementById("d2").innerHTML = date2.split('T')[0];
+                        
+                        //Day 3
+                        let maxtemp3 = json.response[0].periods[2].maxTempF;
+                        let mintemp3 = json.response[0].periods[2].minTempF;
+                        let icon3 = json.response[0].periods[2].icon;
+                        let date3 = json.response[0].periods[2].dateTimeISO;
+                        document.getElementById("mxt3").innerHTML = "Max Temp: " + maxtemp3; +"°F"
+                        document.getElementById("mnt3").innerHTML = "Min Temp: " + mintemp3 +"°F";
+                        document.getElementById("i3").src = murl + icon3;
+                        document.getElementById("d3").innerHTML = date3.split('T')[0];
+                        
+                        //Day 4
+                        let maxtemp4 = json.response[0].periods[3].maxTempF;
+                        let mintemp4 = json.response[0].periods[3].minTempF;
+                        let icon4 = json.response[0].periods[3].icon;
+                        let date4 = json.response[0].periods[3].dateTimeISO;
+                        document.getElementById("mxt4").innerHTML = "Max Temp: " + maxtemp4 +"°F";
+                        document.getElementById("mnt4").innerHTML = "Min Temp: " + mintemp4 +"°F";
+                        document.getElementById("i4").src = murl + icon4;
+                        document.getElementById("d4").innerHTML = date4.split('T')[0];
+                        
+                        //Day 5
+                        let maxtemp5 = json.response[0].periods[4].maxTempF;
+                        let mintemp5 = json.response[0].periods[4].minTempF;
+                        let icon5 = json.response[0].periods[4].icon;
+                        let date5 = json.response[0].periods[4].dateTimeISO;
+                        document.getElementById("mxt5").innerHTML = "Max Temp: " + maxtemp5 +"°F";
+                        document.getElementById("mnt5").innerHTML = "Min Temp: " + mintemp5 +"°F";
+                        document.getElementById("i5").src = murl + icon5;
+                        document.getElementById("d5").innerHTML = date5.split('T')[0];
+                        
+                        //Day 6
+                        let maxtemp6 = json.response[0].periods[5].maxTempF;
+                        let mintemp6 = json.response[0].periods[5].minTempF;
+                        let icon6 = json.response[0].periods[5].icon;
+                        let date6 = json.response[0].periods[5].dateTimeISO;
+                        document.getElementById("mxt6").innerHTML = "Max Temp: " + maxtemp6 +"°F";
+                        document.getElementById("mnt6").innerHTML = "Min Temp: " + mintemp6 +"°F";
+                        document.getElementById("i6").src = murl + icon6;
+                        document.getElementById("d6").innerHTML = date6.split('T')[0];
+                        
+                        //Day 7
+                        let maxtemp7 = json.response[0].periods[6].maxTempF;
+                        let mintemp7 = json.response[0].periods[6].minTempF;
+                        let icon7 = json.response[0].periods[6].icon;
+                        let date7 = json.response[0].periods[6].dateTimeISO;
+                        document.getElementById("mxt7").innerHTML = "Max Temp: " + maxtemp7 +"°F";
+                        document.getElementById("mnt7").innerHTML = "Min Temp: " + mintemp7 +"°F";
+                        document.getElementById("i7").src = murl + icon7;
+                        document.getElementById("d7").innerHTML = date7.split('T')[0];
+                        
+                    }
+                };
+                let lat = la;
+                let lon = lo;
+                let URL = "./getWeather?lat="+ lat +"&lon=" + lon;
+                xhttp.open("GET",URL,true);
+                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp.send();
+            }
+        </script>
+    </head>
+
+    <body>
+        <center>
+            <h1><strong>Get Weather Forecast based on Location</strong></h1>
+            <button id="ForecastButton" onclick="initialize()">Show Forecast</button>
+            <div style="display:flex; flex-direction: column">
+                <div id="Messages"></div>
+                    <div id= "ForecastBox">
+                        <div id= "f1"> 
+                            <strong><p id = "d1"></p></strong>
+                            <img id = "i1">
+                            <p id="mxt1"></p>
+                            <p id="mnt1"></p>
+                        </div>
+                        <div id= "f2"> 
+                            <strong><p id = "d2"></p></strong>
+                            <img id = "i2">
+                            <p id="mxt2"></p>
+                            <p id="mnt2"></p>
+                        </div>
+                        <div id= "f3"> 
+                            <strong><p id = "d3"></p></strong>
+                            <img id = "i3">
+                            <p id="mxt3"></p>
+                            <p id="mnt3"></p>
+                        </div>
+                        <div id= "f4"> 
+                            <strong><p id = "d4"></p></strong>
+                            <img id = "i4">
+                            <p id="mxt4"></p>
+                            <p id="mnt4"></p>
+                        </div>
+                        <div id= "f5"> 
+                            <strong><p id = "d5"></p></strong>
+                            <img id = "i5">
+                            <p id="mxt5"></p>
+                            <p id="mnt5"></p>
+                        </div>
+                        <div id= "f6">
+                            <strong><p id = "d6"></p></strong>
+                            <img id = "i6">
+                            <p id="mxt6"></p>
+                            <p id="mnt6"></p>
+                        </div>
+                        <div id= "f7">
+                            <strong><p id = "d7"></p></strong>
+                            <img id = "i7">
+                            <p id="mxt7"></p>
+                            <p id="mnt7"></p>
+                        </div>
+                    </div>
+                </div>
+        </center>
+    </body>
+      
+</html>
